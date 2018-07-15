@@ -29,16 +29,22 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
+// DONE (1) Add annotation to specify AndroidJUnitRunner class as the default test runner - ??? Runner or JUnit4 ?
 /**
  * This test demos a user clicking the decrement button and verifying that it properly decrease
  * the quantity the total cost.
  */
-
-// DONE (1) Add annotation to specify AndroidJUnitRunner class as the default test runner - ??? Runner or JUnit4 ?
 @RunWith(AndroidJUnit4.class)
 public class OrderActivityBasicTest {
 
     // DONE (2) Add the rule that provides functional testing of a single activity
+    /**
+     * The ActivityTestRule is a rule provided by Android used for functional testing of a single
+     * activity. The activity that will be tested will be launched before each test that's annotated
+     * with @Test and before methods annotated with @before. The activity will be terminated after
+     * the test and methods annotated with @After are complete. This rule allows you to directly
+     * access the activity during the test.
+     */
     @Rule
     public ActivityTestRule<OrderActivity> mActivityTestRule = new ActivityTestRule<>(OrderActivity.class);
 
@@ -55,13 +61,13 @@ public class OrderActivityBasicTest {
     }
 
 
-
     // DONE (3) Finish writing this test which will:
     //          - Check that the initial quantity is zero
     //          - Click on the decrement button
     //          - Verify that the decrement button won't decrease the quantity 0 and cost below $0.00
     @Test
     public void clickDecrementButton_ChangesQuantityAndCost() {
+
         // Check the initial quantity variable is zero
         onView((withId(R.id.quantity_text_view))).check(matches(withText("0")));
 
@@ -74,5 +80,6 @@ public class OrderActivityBasicTest {
 
         // Verify that the increment button also increases the total cost to $5.00
         onView(withId(R.id.cost_text_view)).check(matches(withText("$0.00")));
+
     }
 }
