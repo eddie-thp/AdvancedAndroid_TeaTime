@@ -29,6 +29,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
 import static org.hamcrest.Matchers.anything;
 
 /**
@@ -65,12 +66,14 @@ public class MenuActivityScreenTest {
      */
     @Test
     public void clickGridViewItem_OpensOrderActivity() {
+
         // Uses {@link Espresso#onData(org.hamcrest.Matcher)} to get a reference to a specific
         // gridview item and clicks it.
         onData(anything()).inAdapterView(withId(R.id.tea_grid_view)).atPosition(1).perform(click());
 
         // Checks that the OrderActivity opens with the correct tea name displayed
         onView(withId(R.id.tea_name_text_view)).check(matches(withText(TEA_NAME)));
+
     }
 
 }
